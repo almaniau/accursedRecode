@@ -11,8 +11,8 @@ return Effect.New({
     ApplyEffect = function(own: Types.Effect, level: number, char: Model)
 
         --TODO: Add burning visual effect
-        -- thieihaoi
         --i switched the branch
+        --feijofouiefoe
 
         if not RunService:IsServer() then
             warn("on client")
