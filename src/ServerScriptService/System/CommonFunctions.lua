@@ -16,9 +16,9 @@ local CommonFunctions = {
 	},
 	AdminPerms = {
 		{
-			Name = "Dyscarn",
-			UserId = 432073982,
-			Rank = "Developer",
+			-- Name = "Dyscarn",
+			-- UserId = 432073982,
+			-- Rank = "Developer",
 		},
 	},
 
