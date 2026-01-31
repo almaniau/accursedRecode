@@ -14,8 +14,8 @@ return {
         LayoutOrder = 1,
         Achievements = {
             Welcome = {
-                Title = "Welcome To [INSERT GAME NAME]",
-                Description = "Play [INSERT GAME NAME] for the first time",
+                Title = "Welcome To AccursedRecode",
+                Description = "Play AccursedRecode for the first time",
                 RewardType = "Currency",
                 Amount = 300,
                 LayoutOrder = 1,

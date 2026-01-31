@@ -17,6 +17,14 @@ function PlayerInitter:Init()
 
     Player:SetAttribute("BaseFOV", 70)
 
+    local humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
+    local animator = humanoid:FindFirstChildOfClass("Animator")
+
+    if not animator then
+        animator = Instance.new("Animator")
+        animator.Parent = humanoid
+    end
+
     for _, Module in script.Parent:GetDescendants() do
         if not (Module:IsA("ModuleScript") and Module ~= script and Module ~= PlayerModule and not Module:IsDescendantOf(PlayerModule)) then
             continue

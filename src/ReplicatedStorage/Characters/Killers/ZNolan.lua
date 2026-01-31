@@ -166,6 +166,12 @@ local ZNolan: Types.Killer = Character.CreateKiller({
         },
 
         TeleporterPrefab = script.NullexTeleporter,
+
+        AnimationIDs = {
+            IdleAnimation = "rbxassetid://86473463016151",
+            WalkAnimation = "rbxassetid://122437062315092",
+            RunAnimation = "rbxassetid://73164883164058",
+        },
     },
     
     GameplayConfig = {

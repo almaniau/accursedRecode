@@ -166,6 +166,12 @@ local _2011x: Types.Killer = Character.CreateKiller({
         },
 
         TeleporterPrefab = script.NullexTeleporter,
+
+        AnimationIDs = {
+            IdleAnimation = "rbxassetid://127523116016490",
+            WalkAnimation = "rbxassetid://83628752878942",
+            RunAnimation = "rbxassetid://113747735682069",
+        },
     },
     
     GameplayConfig = {

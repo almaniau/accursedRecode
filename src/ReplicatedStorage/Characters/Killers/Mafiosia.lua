@@ -166,6 +166,12 @@ local Mafiosia: Types.Killer = Character.CreateKiller({
         },
 
         TeleporterPrefab = script.NullexTeleporter,
+
+        AnimationIDs = {
+            IdleAnimation = "rbxassetid://80822449179790",
+            WalkAnimation = "rbxassetid://108358384740054",
+            RunAnimation = "rbxassetid://83714568409210",
+        },
     },
     
     GameplayConfig = {
@@ -173,7 +179,8 @@ local Mafiosia: Types.Killer = Character.CreateKiller({
 
             --Slash
             Slash = require(ReplicatedStorage.Classes.Ability.Slash).New({
-                Duration = 0.35
+                Duration = 0.35,
+                UseAnimation = "rbxassetid://113267778065989",
             }),
 
             --DataAnchor = Ability.New({

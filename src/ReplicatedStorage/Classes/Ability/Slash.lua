@@ -46,7 +46,7 @@ function SlashModule.New(Props: Types.Ability?): Types.Ability
 		Damage = 20,
 		RenderImage = "rbxassetid://11218451110",
 		UseSound = "rbxassetid://12222200",
-		UseAnimation = "rbxassetid://133504250023139",
+		UseAnimation = "rbxassetid://113267778065989",
 		UICorner = true,
 		Delay = 0.1,
 		HitboxSize = Vector3.new(5, 6, 4.5),
