@@ -164,9 +164,7 @@ local function OnCommanderHit(self: Types.Ability, _hitbox: Types.HitboxDetails,
     CommonFunctions.ApplyEffect({
         TargetHumanoid = self.OwnerProperties.Humanoid,
         EffectSettings = {
-            Name = "Resistance",
-            Level = 1,
-            Duration = 1,
+            Name = "Invisibility",
         },
     })
 end

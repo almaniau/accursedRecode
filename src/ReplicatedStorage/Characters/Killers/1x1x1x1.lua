@@ -165,7 +165,7 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
             Icon = "rbxasset://textures/ui/GuiImagePlaceholder.png",
         },
 
-        TeleporterPrefab = script.NullexTeleporter,
+        
 
         AnimationIDs = {
             IdleAnimation = "rbxassetid://87431148823078",
