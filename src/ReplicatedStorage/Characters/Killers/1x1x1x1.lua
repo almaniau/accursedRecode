@@ -185,7 +185,11 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
 
             TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash).New({
                 
-            })
+            }),
+
+            Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave).New({
+
+            }),
 
             --DataAnchor = Ability.New({
             --    Name = "Data Anchor",
