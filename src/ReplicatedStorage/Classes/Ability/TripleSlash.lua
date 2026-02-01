@@ -9,12 +9,14 @@ local Sounds = require(ReplicatedStorage.Modules.Sounds)
 local Ability = require(ReplicatedStorage.Classes.Ability)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
-local CommonUtils = require(ServerScriptService.System.CommonFunctions)
+
 
 local TripleSlashModule = {}
 
 local function ApplyVelocity(intialVelocity : number, character : Model)
-    local velInstance = CommonUtils.ApplyVelocity(character, {InitialVelocity = intialVelocity})
+    local CommonUtils = require(ServerScriptService.System.CommonFunctions)
+    local velInstance = CommonUtils.ApplyVelocity(character, {InitialVelocity = intialVelocity, LerpDelta = 0.1})
+    velInstance.Parent = character
     task.delay(2, function()
         velInstance:Destroy()
     end)
@@ -50,7 +52,7 @@ end
 function TripleSlashModule.New()
     local Final = Ability.New({
         Name = "TripleSlash",
-        InputName = "Q",
+        InputName = "FirstAbility",
         Cooldown = 15,
         Behaviour = TripleSlashBehavior,
     })

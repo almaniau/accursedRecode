@@ -639,7 +639,7 @@ function CommonFunctions.ApplyVelocity(Part: Model | BasePart, FuncSettings: App
 	
 	--create the mandatory attachment and joint it to the target's pivot to set the origin point for the velocity
 	local Attachment = Instance.new("Attachment")
-	Attachment.CFrame = Part.CFrame
+	Attachment.CFrame = CFrame.new(0, 0, 0) -- uh attachment cframes are in objectspace, this normally is Part.CFrame but i need to fix this
 	Attachment.Name = "ApplyVelocityAttachment"
 	Attachment.Parent = Part
 
