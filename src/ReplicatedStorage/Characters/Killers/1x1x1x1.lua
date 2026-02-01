@@ -9,6 +9,7 @@ local CommonFunctions = RunService:IsServer() and require(ServerScriptService.Sy
 local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("ServerScriptService").Managers.PlayerManager.PlayerSpeedManager) or nil
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
+local TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
@@ -179,7 +180,15 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
 
             --Slash
             Slash = require(ReplicatedStorage.Classes.Ability.Slash).New({
-                Duration = 0.35
+                Duration = 0.5 -- this was way too low
+            }),
+
+            TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash).New({
+                
+            }),
+
+            Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave).New({
+
             }),
 
             --DataAnchor = Ability.New({
