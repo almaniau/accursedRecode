@@ -180,7 +180,7 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
 
             --Slash
             Slash = require(ReplicatedStorage.Classes.Ability.Slash).New({
-                Duration = 0.35
+                Duration = 0.5 -- this was way too low
             }),
 
             TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash).New({
