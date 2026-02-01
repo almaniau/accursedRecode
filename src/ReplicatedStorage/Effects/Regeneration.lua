@@ -21,7 +21,7 @@ return Effect.New({
         local healAmount = 2 + level * 1 -- Heal amount per tick
         local ticks = own.Duration -- Number of ticks (1 per second)
 
-        for i = 1, ticks do
+        for _ = 1, ticks do
             if humanoid.Health < humanoid.MaxHealth then
                 humanoid.Health = math.min(humanoid.Health + healAmount, humanoid.MaxHealth)
             end
