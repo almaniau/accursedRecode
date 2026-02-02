@@ -8,6 +8,7 @@ local Projectile = require(ReplicatedStorage.Classes.Projectile)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
 local Ability = require(ReplicatedStorage.Classes.Ability)
 local Types = require(ReplicatedStorage.Classes.Types)
+local Network = require(ReplicatedStorage.Modules.Network)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
 
@@ -50,6 +51,7 @@ local function ShockwaveBehavior(self : Types.Ability)
                 Shape = Enum.PartType.Cylinder,
             })
             lastHitPos = hitPos
+            Network:FireAllClientConnection("1xShockwave", "REMOTE_EVENT", hitPos)
         end
 
         task.wait(0.1)

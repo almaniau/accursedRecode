@@ -283,4 +283,21 @@ function CharacterUtils.GetCharactersWithRoles(IncludeAFK: boolean?): {[string]:
     return Characters
 end
 
+-- call once to apply face for: normal, hurt, under 50%, and dead
+function CharacterUtils.ApplyDefaultFacialExpressions(character : Model, faces)
+	local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+	local face : Decal = character.Head:FindFirstChild("face")
+	if not face then return end -- i have no mouth yet i must scream
+	face.ColorMap = "rbxassetid://" .. faces.Default -- it says here its a string but on offical documentation its a "ContentId"
+	humanoid.HealthChanged:Connect(function(currentHealth : number)
+		face.ColorMap = "rbxassetid://" .. faces.Damaged
+		task.wait(1)
+		if currentHealth < humanoid.Health / 2 then
+			face.ColorMap = "rbxassetid://" .. faces.Hurt
+		else
+			face.ColorMap = "rbxassetid://" .. faces.Default
+		end
+	end)
+end
+
 return CharacterUtils
