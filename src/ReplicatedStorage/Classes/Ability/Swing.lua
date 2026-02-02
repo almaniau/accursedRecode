@@ -32,7 +32,7 @@ local function SwingBehavior(self : Types.Ability)
        --idk twin
        local currentSword = self.OwnerProperties.Character:GetAttribute("CurrentSword") -- thank you lua dynamic variables
        currentSword = SwordsList[currentSword]
-
+       print(currentSword) 
        task.delay(0.8, function()
         Hitbox.New(self.Owner, {
 				CFrameOffset = CFrame.new(0, 0, 5),
