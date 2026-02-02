@@ -27,16 +27,31 @@ local SwordsList = {
     "Ghostwalker"
 }
 
+local function ToggleSwordVisibility(model : Model, visible : boolean)
+    for _, children in pairs(model:GetChildren()) do
+        if children:IsA("BasePart") then
+            children.Transparency = visible and 0 or 1
+        end
+    end
+end
+
 local function SwingBehavior(self : Types.Ability)
     if RunService:IsServer() then
        --idk twin
        local currentSword = self.OwnerProperties.Character:GetAttribute("CurrentSword") -- thank you lua dynamic variables
+       print(currentSword)
        currentSword = SwordsList[currentSword]
+       print(currentSword)
+       local swordModel : Model = self.OwnerProperties.Character:FindFirstChild(currentSword)
+       if swordModel then
+        ToggleSwordVisibility(swordModel, true)
+       end
+
        print(currentSword) 
        task.delay(0.8, function()
         Hitbox.New(self.Owner, {
-				CFrameOffset = CFrame.new(0, 0, 5),
-				Size = Vector3.new(1, 9, 7),
+				CFrameOffset = CFrame.new(0, 0, -5),
+				Size = Vector3.new(1, 9, 7), -- if you know you know
 				Time = 1.2,
 				Damage = 30,
 				Reason = "Swing Attack",

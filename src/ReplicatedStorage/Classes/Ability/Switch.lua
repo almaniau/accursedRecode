@@ -25,7 +25,7 @@ local function SwitchBeahvior(self : Types.Ability)
 end
 
 local function SwitchExtraInit(self: Types.Ability)
-    self.OwnerProperties.Character:SetAttribute("CurrentSowrd", 1)
+    self.OwnerProperties.Character:SetAttribute("CurrentSword", 1)
 end
 
 function SwitchModule.New()

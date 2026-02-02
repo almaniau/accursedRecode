@@ -193,7 +193,7 @@ local Noob: Types.Survivor = Character.CreateSurvivor({
 
     GameplayConfig = {
         Abilities = {
-
+            -- yes the exact stats are fucking hardcoded in, fight me later over it
             HealBurger = require(ReplicatedStorage.Classes.Ability.HealBurger).New({
 
             }),
