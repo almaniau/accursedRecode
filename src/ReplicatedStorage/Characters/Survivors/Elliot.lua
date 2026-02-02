@@ -193,7 +193,9 @@ local Elliot: Types.Survivor = Character.CreateSurvivor({
 
     GameplayConfig = {
         Abilities = {
-            
+            Pizza = require(ReplicatedStorage.Classes.Ability.Pizza).New({
+
+            }),
         }
     }
 
