@@ -1,12 +1,18 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Network = require(ReplicatedStorage.Modules.Network)
 local RockModule = require(ReplicatedStorage.Modules.RockModule)
+local Utils = require(ReplicatedStorage.Modules.Utils)
+local Players = game:GetService("Players")
 
 local VFXClient = {}
 
 function VFXClient:Init()
     print("VFXCLIENT INIT")
     Network:SetConnection("1xShockwave", "REMOTE_EVENT", function(hitPos)
+        local distance = (hitPos - Utils.Character.GetRootPart(Players.LocalPlayer).Position).Magnitude
+        print(distance)
+        Utils.Player.ShakeCamera(math.max(200 - distance, 0) / 1000, 0.4)
+        
         local explosion = ReplicatedStorage.VFX["1x1x1x1"].Shockwave:Clone()
         explosion.Parent = workspace
         explosion.Position = hitPos
