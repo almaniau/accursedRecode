@@ -5,6 +5,7 @@ local TweenService = game:GetService("TweenService")
 
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
+local Switch = require(ReplicatedStorage.Classes.Ability.Switch)
 local Hitbox = require(ReplicatedStorage.Classes.Hitbox)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
@@ -189,14 +190,20 @@ local Shedletsky: Types.Survivor = Character.CreateSurvivor({
 			WalkAnimation = "rbxassetid://122437062315092",
 			RunAnimation = "rbxassetid://73164883164058",
 		},
+
     },
 
     GameplayConfig = {
+        
         Abilities = {
 
             Swing = require(ReplicatedStorage.Classes.Ability.Swing).New({
 
             }),
+
+            Switch = require(ReplicatedStorage.Classes.Ability.Switch).New({
+
+            })
 
             --burger
             --epicsauce

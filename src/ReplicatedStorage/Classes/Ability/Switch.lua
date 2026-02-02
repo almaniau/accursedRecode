@@ -19,10 +19,13 @@ local SwitchModule = {}
 
 local function SwitchBeahvior(self : Types.Ability)
     if RunService:IsServer() then
-       --idk twin
-       
-       print("switch sword")
+       self.OwnerProperties.Character:SetAttribute("CurrentSword", (self.OwnerProperties.Character:GetAttribute("CurrentSword") + 1) % 8)
+       print(self.OwnerProperties.Character:GetAttribute("CurrentSword"))
     end
+end
+
+local function SwitchExtraInit(self: Types.Ability)
+    self.OwnerProperties.Character:SetAttribute("CurrentSowrd", 1)
 end
 
 function SwitchModule.New()
@@ -31,7 +34,9 @@ function SwitchModule.New()
         InputName = "ThirdAbility",
         Cooldown = 1,
         Behaviour = SwitchBeahvior,
+        ExtraInit = SwitchExtraInit, -- sets the sword to 1, corresponds to linked
     })
+
 
     return Final
 
