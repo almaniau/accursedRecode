@@ -10,6 +10,7 @@ local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("Se
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
 local TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash)
+local UnstableEye = require(ReplicatedStorage.Classes.Ability.UnstableEye)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
@@ -188,6 +189,10 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
             }),
 
             Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave).New({
+
+            }),
+
+            UnstableEye = require(ReplicatedStorage.Classes.Ability.UnstableEye).New({
 
             }),
 
