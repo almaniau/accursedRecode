@@ -201,6 +201,10 @@ local Shedletsky: Types.Survivor = Character.CreateSurvivor({
 
             }),
 
+            Chicken = require(ReplicatedStorage.Classes.Ability.Chicken).New({
+                
+            }),
+
             Switch = require(ReplicatedStorage.Classes.Ability.Switch).New({
 
             })
