@@ -16,7 +16,25 @@ local function BuildBehavior(self)
 end
 
 local function BuildermanInit(char : Model)
+    -- there is prob better way to do this is using InstanceUtils.GetCharacterModule in the behavior but i dont give a fuck
     char:SetAttribute("SentryModel", game.ReplicatedStorage.Assets.BuildermanSentries.DefaultSentry)
+end
+
+local function CheckValidPlacement(self : Types.Ability)
+    if RunService:IsServer() then
+        local origin = self.OwnerProperties.HRP.CFrame * CFrame.new(0, 0, -4)
+         -- ill have to tweak this later but its a downward raycast
+        local ray = workspace:Raycast(origin, Vector3.new(0, -2.5, 0))
+
+        if ray.Instance then
+            return true
+        else
+            return false
+        end
+    else
+        --isnt server???
+        return false
+    end
 end
 
 --[[
@@ -67,11 +85,12 @@ local Builderman: Types.Survivor = Character.CreateSurvivor({
     GameplayConfig = {
         Abilities = {
             -- yes the exact stats are fucking hardcoded in, fight me later over it
-            HealBurger = Ability.New({
+            Build = Ability.New({
                 Name = "Build",
                 InputName = "FirstAbility",
                 Cooldown = 30,
-                Behaviour = BuildBehavior
+                UseConditions = CheckValidPlacement,
+                Behaviour = BuildBehavior,
             }),
         }
     },
