@@ -1,7 +1,29 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local ServerStorage = game:GetService("ServerStorage")
+local Ability = require(ReplicatedStorage.Classes.Ability)
 local Character = require(ReplicatedStorage.Classes.Character)
 local Types = require(ReplicatedStorage.Classes.Types)
 
+local BehaviorModule = require(RunService:IsServer() and ServerStorage.ServerCharacterBehaviors.Survivors.ShedletskyBehavior)
+
+local function SwingBehavior(self)
+    if RunService:IsServer() then
+        BehaviorModule.Swing(self)
+    end
+end
+
+local function ChickenBehavior(self)
+    if RunService:IsServer() then
+        BehaviorModule.Chicken(self)
+    end
+end
+
+local function SwitchBehavior(self)
+    if RunService:IsServer() then
+        BehaviorModule.Switch(self)
+    end
+end
 
 local Shedletsky: Types.Survivor = Character.CreateSurvivor({
     Config = {
@@ -26,17 +48,26 @@ local Shedletsky: Types.Survivor = Character.CreateSurvivor({
         
         Abilities = {
 
-            Swing = require(ReplicatedStorage.Classes.Ability.Swing).New({
-
+            Swing = Ability.New({
+                Name = "Swing",
+                InputName = "FirstAbility",
+                Cooldown = 40,
+                Behaviour = SwingBehavior
             }),
 
-            Chicken = require(ReplicatedStorage.Classes.Ability.Chicken).New({
-
+            Chicken = Ability.New({
+                Name = "Chicken",
+                InputName = "SecondAbility",
+                Cooldown = 40,
+                Behaviour = ChickenBehavior
             }),
 
-            Switch = require(ReplicatedStorage.Classes.Ability.Switch).New({
-
-            })
+            Switch = Ability.New({
+                Name = "Swing",
+                InputName = "ThirdAbility",
+                Cooldown = 1,
+                Behaviour = SwitchBehavior
+            }),
 
             --burger
             --epicsauce

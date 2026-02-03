@@ -18,6 +18,7 @@ local Info = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOu
 local MasterSoundGroup = SoundService.SoundGroups.Master
 local SoundFolder = SoundService.TempSounds
 local BehaviorsModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
+print(BehaviorsModule)
 
 local function TripleSlashBehavior(self : Types.Ability)
     print("triple slash")
@@ -27,9 +28,7 @@ local function TripleSlashBehavior(self : Types.Ability)
 end
 
 local function ShockwaveBehavior(self : Types.Ability)
-    print("shockwave")
     if RunService:IsServer() then
-        
         BehaviorsModule.Shockwave(self)
     end
 end
@@ -216,14 +215,14 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
                 Name = "Shockwave",
                 InputName = "SecondAbility",
                 Cooldown = 25,
-                Behavior = ShockwaveBehavior
+                Behaviour = ShockwaveBehavior
             }),
 
             UnstableEye = Ability.New({
                 Name = "Unstable Eye",
                 InputName = "ThirdAbility",
                 Cooldown = 30,
-                Behavior = UnstableEyeBehavior
+                Behaviour = UnstableEyeBehavior
             }),
 
             --DataAnchor = Ability.New({
