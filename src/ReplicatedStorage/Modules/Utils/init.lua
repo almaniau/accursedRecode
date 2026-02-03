@@ -39,18 +39,9 @@ local Utils = {
 --- If you change this, you're a bum.
 Utils.Credits = [[
 
-######  #     #  #####  #     # #     # #     # ####### ####### ######   ###   #####     #    #       
-#     #  #   #  #     #  #   #  ##   ## ##   ## #          #    #     #   #   #     #   # #   #       
-#     #   # #   #         # #   # # # # # # # # #          #    #     #   #   #        #   #  #       
-#     #    #     #####     #    #  #  # #  #  # #####      #    ######    #   #       #     # #       
-#     #    #          #    #    #     # #     # #          #    #   #     #   #       ####### #       
-#     #    #    #     #    #    #     # #     # #          #    #    #    #   #     # #     # #       
-######     #     #####     #    #     # #     # #######    #    #     #  ###   #####  #     # ####### 
-
-
-This game is using Dysymmetrical, an open-source asymmetrical game engine available on GitHub.
-Credits to Dyscarn for making it! (hello!)
 ]]
+
+-- sorry dyscarn
 
 function Utils:Init()
     if not RunService:IsServer() then
