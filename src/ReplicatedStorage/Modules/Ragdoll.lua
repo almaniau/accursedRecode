@@ -113,6 +113,7 @@ function Ragdoll.Enable(Character: Model, Dupe: boolean)
 		--handle ragdoll limit option
 		Char = Character:Clone()
 		Char.Parent = RagdollFolder
+		Char.Humanoid.PlatformStand = true
 		if Char.PrimaryPart then
 			Char.PrimaryPart.Anchored = false
 		end
@@ -150,11 +151,12 @@ function Ragdoll.Enable(Character: Model, Dupe: boolean)
 			if Humanoid then
 				Humanoid.Health = 1
 				Humanoid.PlatformStand = true
+				print(Humanoid.PlatformStand)
 				Humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOff
 
-				if RunService:IsClient() and Players.LocalPlayer.Character == Character then
-					workspace.CurrentCamera.CameraSubject = not Humanoid.BreakJointsOnDeath and (Char:FindFirstChild("Head") or Humanoid) or Humanoid
-				end
+				-- if RunService:IsClient() and Players.LocalPlayer.Character == Character then
+				-- 	workspace.CurrentCamera.CameraSubject = not Humanoid.BreakJointsOnDeath and (Char:FindFirstChild("Head") or Humanoid) or Humanoid
+				-- end
 			end
 		end)
 		
@@ -289,8 +291,7 @@ function Ragdoll.Disable(Character: Model)
         Humanoid.JumpPower = 0
         Humanoid.JumpHeight = 0
     end
-	--was breaking ragdolls
-    --Humanoid.PlatformStand = false
+    Humanoid.PlatformStand = false
 end
 
 return Ragdoll

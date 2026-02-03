@@ -11,13 +11,14 @@ local Effect = require(ReplicatedStorage.Classes.Effect)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
+local NoobBehaviors = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Survivors.NoobBehavior)
 
 
 local HealBurgerModule = {}
 
 local function HealBurgerBeahvior(self : Types.Ability)
     if RunService:IsServer() then
-        CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Regeneration", Level = 3, Duration = 10}})
+        NoobBehaviors.HealBurger(self)
     end 
 end
 

@@ -11,14 +11,14 @@ local Effect = require(ReplicatedStorage.Classes.Effect)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
+local NoobBehaviors = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Survivors.NoobBehavior)
 
 
 local EpicsauceModule = {}
 
 local function EpicsauceBehavior(self : Types.Ability)
     if RunService:IsServer() then
-        CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 1, Duration = 10}})
-    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Burning", Level = 1, Duration = 10}})
+        NoobBehaviors.Epicsauce(self)
     end
 end
 
