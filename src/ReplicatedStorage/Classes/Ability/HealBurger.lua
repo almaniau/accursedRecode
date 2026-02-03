@@ -16,7 +16,9 @@ local CommonUtils = RunService:IsServer() and require(ServerScriptService.System
 local HealBurgerModule = {}
 
 local function HealBurgerBeahvior(self : Types.Ability)
-    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Regeneration", Level = 3, Duration = 10}})
+    if RunService:IsServer() then
+        CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Regeneration", Level = 3, Duration = 10}})
+    end 
 end
 
 

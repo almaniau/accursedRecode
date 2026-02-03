@@ -16,8 +16,10 @@ local CommonUtils = RunService:IsServer() and require(ServerScriptService.System
 local EpicsauceModule = {}
 
 local function EpicsauceBehavior(self : Types.Ability)
-    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 1, Duration = 10}})
+    if RunService:IsServer() then
+        CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 1, Duration = 10}})
     CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Burning", Level = 1, Duration = 10}})
+    end
 end
 
 

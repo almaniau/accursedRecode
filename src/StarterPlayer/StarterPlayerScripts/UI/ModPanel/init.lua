@@ -82,6 +82,9 @@ function ModPanel.Start()
         local Command = require(Cmd)
         Command.RankRequired = Command.RankRequired or Utils.Ranks.ServerOwner
         print(Command.RankRequired)
+        print(ModPanel.Rank)
+        print(Command.Name)
+        print(Command.Type)
         if ModPanel.Rank > Command.RankRequired or not Command.Type or not Prefabs[Command.Type] then
             warn("not high enough rank!")
             return

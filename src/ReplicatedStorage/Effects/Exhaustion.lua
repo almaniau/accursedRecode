@@ -3,7 +3,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
 
-local PlayerSprintManager = require(ServerScriptService.Managers.PlayerManager.PlayerSprintManager)
+local PlayerSprintManager = RunService:IsServer() and require(ServerScriptService.Managers.PlayerManager.PlayerSprintManager)
 local Effect = require(ReplicatedStorage.Classes.Effect)
 local Types = require(ReplicatedStorage.Classes.Types)
 
