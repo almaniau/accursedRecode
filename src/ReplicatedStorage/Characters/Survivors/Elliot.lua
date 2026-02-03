@@ -1,6 +1,7 @@
 local Debris = game:GetService("Debris")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local ServerStorage = game:GetService("ServerStorage")
 local TweenService = game:GetService("TweenService")
 
 local Character = require(ReplicatedStorage.Classes.Character)
@@ -12,7 +13,13 @@ local Sounds = require(ReplicatedStorage.Modules.Sounds)
 local CommonFunctions = RunService:IsServer() and require(game:GetService("ServerScriptService").System.CommonFunctions) or nil
 local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("ServerScriptService").Managers.PlayerManager.PlayerSpeedManager) or nil
 
+local BehaviorModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Survivors.ElliotBehavior)
 
+local function PizzaBehavior(self)
+    if RunService:IsServer() then
+        BehaviorModule.Pizza(self)
+    end
+end
 
 --local function BlindsideBehaviour(self: Types.Ability)
 --    if RunService:IsServer() then
@@ -200,9 +207,12 @@ local Elliot: Types.Survivor = Character.CreateSurvivor({
 
     GameplayConfig = {
         Abilities = {
-            Pizza = require(ReplicatedStorage.Classes.Ability.Pizza).New({
-
-            }),
+            Pizza = Ability.New({
+                Name = "Pizza",
+                InputName = "FirstAbility",
+                Cooldown = 40,
+                Behaviour = PizzaBehavior,
+            })
         }
     }
 
