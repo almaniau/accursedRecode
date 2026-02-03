@@ -47,6 +47,8 @@ function CharTypes.GetDefaultSurvivorSettings(): Types.Survivor
 
             Sounds = {},
         },
+        --TODO add in facial expression fallbacks
+        
 
         GameplayConfig = {
             Health = 100,

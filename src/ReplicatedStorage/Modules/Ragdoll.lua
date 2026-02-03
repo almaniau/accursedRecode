@@ -149,6 +149,7 @@ function Ragdoll.Enable(Character: Model, Dupe: boolean)
 		task.spawn(function()
 			if Humanoid then
 				Humanoid.Health = 1
+				Humanoid.PlatformStand = true
 				Humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOff
 
 				if RunService:IsClient() and Players.LocalPlayer.Character == Character then
@@ -288,7 +289,8 @@ function Ragdoll.Disable(Character: Model)
         Humanoid.JumpPower = 0
         Humanoid.JumpHeight = 0
     end
-    Humanoid.PlatformStand = false
+	--was breaking ragdolls
+    --Humanoid.PlatformStand = false
 end
 
 return Ragdoll

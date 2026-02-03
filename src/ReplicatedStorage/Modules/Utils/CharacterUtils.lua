@@ -284,20 +284,19 @@ function CharacterUtils.GetCharactersWithRoles(IncludeAFK: boolean?): {[string]:
 end
 
 -- call once to apply face for: normal, hurt, under 50%, and dead
-function CharacterUtils.ApplyDefaultFacialExpressions(character : Model, faces)
+@deprecated
+--haha none of this is fucking useful anymore i found a better way to do this
+function CharacterUtils.ApplyDefaultFacialExpressions(character : Model)
 	local humanoid = character:FindFirstChildWhichIsA("Humanoid")
 	local face : Decal = character.Head:FindFirstChild("face")
+	local currentCharacter = character:GetAttribute("CharacterName")
+	if not currentCharacter then return end
 	if not face then return end -- i have no mouth yet i must scream
-	face.ColorMap = "rbxassetid://" .. faces.Default -- it says here its a string but on offical documentation its a "ContentId"
-	humanoid.HealthChanged:Connect(function(currentHealth : number)
-		face.ColorMap = "rbxassetid://" .. faces.Damaged
-		task.wait(1)
-		if currentHealth < humanoid.Health / 2 then
-			face.ColorMap = "rbxassetid://" .. faces.Hurt
-		else
-			face.ColorMap = "rbxassetid://" .. faces.Default
-		end
-	end)
+	 -- we live a cruel world for this to be not typecasted
+	local characterInfo = require(ReplicatedStorage.Characters.Survivors:FindFirstChild(currentCharacter))
+	print(characterInfo.FacialExpressions)
+	
+	
 end
 
 return CharacterUtils

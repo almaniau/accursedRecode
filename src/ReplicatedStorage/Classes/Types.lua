@@ -347,6 +347,13 @@ export type Survivor = {
             [string]: (string | {string}),
         },
     },
+    --hi its anonymous and i fuckiing hate my life
+    FacialExpressions: {
+        Default : string,
+        Hurt : string,
+        Limping : string,
+        Dead : string
+    },
 
     --- Gameplay mechanics config that will affect how the character works.
     GameplayConfig: {

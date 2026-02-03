@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 local Character = require(ReplicatedStorage.Classes.Character)
 local Types = require(ReplicatedStorage.Classes.Types)
 
-local function OnCommanderInit(self: Types.Survivor, Char: Model)
+local function OnNoobInit(self: Types.Survivor, Char: Model)
     if not RunService:IsServer() then
         return
     end
@@ -22,5 +22,5 @@ return Character.CreateSkin("Survivor", "Noob", {
         Origin = {},
     },
 
-    OnInit = OnCommanderInit,
+    OnInit = OnNoobInit,
 })

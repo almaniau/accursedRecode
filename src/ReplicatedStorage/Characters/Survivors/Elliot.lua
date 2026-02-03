@@ -191,6 +191,13 @@ local Elliot: Types.Survivor = Character.CreateSurvivor({
 		},
     },
 
+    FacialExpressions = {
+        Default = "rbxassetid://95709355463550",
+        Hurt = "rbxassetid://73822195337615",
+        Limping = "rbxassetid://139846732878850",
+        Dead = "rbxassetid://119335625920830"
+    },
+
     GameplayConfig = {
         Abilities = {
             Pizza = require(ReplicatedStorage.Classes.Ability.Pizza).New({

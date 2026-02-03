@@ -22,6 +22,13 @@ local Noob: Types.Survivor = Character.CreateSurvivor({
 		},
     },
 
+    FacialExpressions = {
+        Default = "rbxassetid://00",
+        Hurt = "rbxassetid://00",
+        Limping = "rbxassetid://00",
+        Dead = "rbxassetid://00"
+    },
+
     GameplayConfig = {
         Abilities = {
             -- yes the exact stats are fucking hardcoded in, fight me later over it
@@ -36,7 +43,7 @@ local Noob: Types.Survivor = Character.CreateSurvivor({
             --epicsauce
             --idk twin
         }
-    }
+    },
 })
 
 Noob.Config.Description = {
@@ -131,6 +138,8 @@ Noob.Config.Description = {
     --        "This ability's charge is obtained through <b>Reload</b>."
     --    },
     --},
+
+    
 }
 
 return Noob
