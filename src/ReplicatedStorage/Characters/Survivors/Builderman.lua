@@ -19,6 +19,25 @@ local function BuildermanInit(char : Model)
     char:SetAttribute("SentryModel", game.ReplicatedStorage.Assets.BuildermanSentries.DefaultSentry)
 end
 
+--[[
+Builderman sentries exact specs and nerd shit (please model it using these rules, it makes my life easier)
+Part names do not have to be casesensitive but animations DO
+Please anchor only the base of the sentry
+Must have an AnimationController with an Animator inside
+Please still follow normal naming conventions e.g, NO SPACES, PascalCase
+Make sure for lvl3 sentries, the rocketshootanim only has keyframes from the rocketpart itself
+When making skins for the sentries, keep the size reasonable imcomparison to the stock sentry
+
+lvl 1 sentries expect a toppart and base with base being MOTOR6D to toppart,
+ a folder that contains anims called Shoot (Action1 Animation Priority) and Idle (Idle Animation Priority)
+
+lvl 2 sentries expects the toppart and base with base being MOTOR6D to toppart,
+ a folder that contains anims called Shoot1 (Action1 Animation Priority), Shoot2 (Action1 Animation Priority), and Idle (Idle Animation Priority)
+
+lvl 3 sentries expects the toppart and base with base being MOTOR6D to toppart as well as an additional rocketlauncher MOTOR6d to toppart,
+a folder that contains anims called Shoot1 (Action1 Animation Priority), Shoot2 (Action1 Animation Priority), ShootRocket (Action1 Animation Priority) and Idle (Idle Animation Priority)
+ ]]
+
 local Builderman: Types.Survivor = Character.CreateSurvivor({
     Config = {
         Name = "Builderman",
