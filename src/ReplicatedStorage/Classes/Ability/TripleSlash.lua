@@ -10,6 +10,7 @@ local Ability = require(ReplicatedStorage.Classes.Ability)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
+local Behaviors = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
 
 
 local TripleSlashModule = {}
@@ -44,15 +45,7 @@ end
 
 local function TripleSlashBehavior(self : Types.Ability)
     if RunService:IsServer() then
-        ApplyVelocity(-80, self.OwnerProperties.Character)
-        
-        task.delay(2, function() --idk change this value later
-            for _ = 1, 3 do
-                ThrowProjectile(self.Owner)
-                ApplyVelocity(40, self.OwnerProperties.Character)
-                task.wait(0.5)
-            end
-        end)
+        Behaviors.TripleSlash(self)
     end
 end
 

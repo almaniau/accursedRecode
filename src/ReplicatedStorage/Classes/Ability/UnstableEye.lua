@@ -11,13 +11,15 @@ local Effect = require(ReplicatedStorage.Classes.Effect)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
+local Behaviors = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
 
 
 local UnstableEyeModule = {}
 
 local function UnstableEyeModuleBehavior(self : Types.Ability)
-    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 2, Duration = 6}})
-    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Blindness", Level = 3, Duration = 6}})
+    if RunService:IsServer() then
+        Behaviors.UnstableEye(self)
+    end
 end
 
 
