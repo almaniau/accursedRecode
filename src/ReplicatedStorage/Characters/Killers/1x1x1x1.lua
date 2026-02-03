@@ -4,11 +4,13 @@ local Debris = game:GetService("Debris")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
 local SoundService = game:GetService("SoundService")
+local ServerStorage = game:GetService("ServerStorage")
 
 local CommonFunctions = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions) or nil
 local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("ServerScriptService").Managers.PlayerManager.PlayerSpeedManager) or nil
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
+local Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave)
 local TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash)
 local UnstableEye = require(ReplicatedStorage.Classes.Ability.UnstableEye)
 local Types = require(ReplicatedStorage.Classes.Types)
@@ -18,6 +20,7 @@ local Sounds = require(ReplicatedStorage.Modules.Sounds)
 local Info = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
 local MasterSoundGroup = SoundService.SoundGroups.Master
 local SoundFolder = SoundService.TempSounds
+local BehaviorsModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
 
 --local function DataAnchorBehaviour(self: Types.Ability)
 --    if RunService:IsServer() then
@@ -184,16 +187,16 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
                 Duration = 0.5 -- this was way too low
             }),
 
-            TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash).New({
-                
+            TripleSlash = Ability.new({
+                Behavior = BehaviorsModule
             }),
 
-            Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave).New({
-
+            Shockwave = Ability.new({
+                Behavior = BehaviorsModule.Shockwave()
             }),
 
-            UnstableEye = require(ReplicatedStorage.Classes.Ability.UnstableEye).New({
-
+            UnstableEye = Ability.new({
+                Behavior = BehaviorsModule.UnstableEye()
             }),
 
             --DataAnchor = Ability.New({
