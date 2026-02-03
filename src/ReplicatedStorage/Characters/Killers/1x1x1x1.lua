@@ -10,9 +10,6 @@ local CommonFunctions = RunService:IsServer() and require(ServerScriptService.Sy
 local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("ServerScriptService").Managers.PlayerManager.PlayerSpeedManager) or nil
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
-local Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave)
-local TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash)
-local UnstableEye = require(ReplicatedStorage.Classes.Ability.UnstableEye)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
@@ -21,6 +18,27 @@ local Info = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOu
 local MasterSoundGroup = SoundService.SoundGroups.Master
 local SoundFolder = SoundService.TempSounds
 local BehaviorsModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
+
+local function TripleSlashBehavior(self : Types.Ability)
+    print("triple slash")
+    if RunService:IsServer() then
+        BehaviorsModule.TripleSlash(self)
+    end
+end
+
+local function ShockwaveBehavior(self : Types.Ability)
+    print("shockwave")
+    if RunService:IsServer() then
+        
+        BehaviorsModule.Shockwave(self)
+    end
+end
+
+local function UnstableEyeBehavior(self : Types.Ability)
+    if RunService:IsServer() then
+        BehaviorsModule.UnstableEye(self)
+    end
+end
 
 --local function DataAnchorBehaviour(self: Types.Ability)
 --    if RunService:IsServer() then
@@ -187,16 +205,25 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
                 Duration = 0.5 -- this was way too low
             }),
 
-            TripleSlash = Ability.new({
-                Behavior = BehaviorsModule
+            TripleSlash = Ability.New({
+                Name = "Triple Slash",
+                InputName = "FirstAbility",
+                Cooldown = 15,
+                Behaviour = TripleSlashBehavior
             }),
 
-            Shockwave = Ability.new({
-                Behavior = BehaviorsModule.Shockwave()
+            Shockwave = Ability.New({
+                Name = "Shockwave",
+                InputName = "SecondAbility",
+                Cooldown = 25,
+                Behavior = ShockwaveBehavior
             }),
 
-            UnstableEye = Ability.new({
-                Behavior = BehaviorsModule.UnstableEye()
+            UnstableEye = Ability.New({
+                Name = "Unstable Eye",
+                InputName = "ThirdAbility",
+                Cooldown = 30,
+                Behavior = UnstableEyeBehavior
             }),
 
             --DataAnchor = Ability.New({

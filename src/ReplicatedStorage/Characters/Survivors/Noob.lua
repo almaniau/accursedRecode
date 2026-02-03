@@ -2,7 +2,23 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Character = require(ReplicatedStorage.Classes.Character)
 local Types = require(ReplicatedStorage.Classes.Types)
+local ServerStorage = game:GetService("ServerStorage")
+local RunService = game:GetService("RunService")
+local Ability = require(ReplicatedStorage.Classes.Ability)
 
+local BehaviorsModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Survivors.NoobBehavior)
+
+local function HealBurger(self)
+    if RunService:IsServer() then
+        BehaviorsModule.HealBurger(self)
+    end
+end
+
+local function Epicsauce(self)
+    if RunService:IsServer() then
+        BehaviorsModule.Epicsauce(self)
+    end
+end
 
 local Noob: Types.Survivor = Character.CreateSurvivor({
     Config = {
@@ -32,12 +48,18 @@ local Noob: Types.Survivor = Character.CreateSurvivor({
     GameplayConfig = {
         Abilities = {
             -- yes the exact stats are fucking hardcoded in, fight me later over it
-            HealBurger = require(ReplicatedStorage.Classes.Ability.HealBurger).New({
-
+            HealBurger = Ability.New({
+                Name = "HealBurger",
+                InputName = "FirstAbility",
+                Cooldown = 30,
+                Behaviour = HealBurger
             }),
 
-            Epicsauce = require(ReplicatedStorage.Classes.Ability.Epicsauce).New({
-
+            Epicsauce = Ability.New({
+                Name = "Epicsauce",
+                InputName = "SecondAbility",
+                Cooldown = 45,
+                Behaviour = Epicsauce
             }),
             --burger
             --epicsauce

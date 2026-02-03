@@ -52,7 +52,8 @@ function BehaviorModule.TripleSlash(self)
 end
 
 function BehaviorModule.Shockwave(self)
-local character = self.OwnerProperties.Character
+    print("do the shockwave")
+    local character = self.OwnerProperties.Character
     local rootPart = character:FindFirstChild("HumanoidRootPart")
     if not rootPart then return end
     
@@ -95,6 +96,7 @@ local character = self.OwnerProperties.Character
 end
 
 function BehaviorModule.UnstableEye(self)
+    print("do the unstable eye")
     CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 2, Duration = 6}})
     CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Blindness", Level = 3, Duration = 6}})
 end
