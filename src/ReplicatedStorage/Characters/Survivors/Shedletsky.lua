@@ -5,7 +5,7 @@ local Ability = require(ReplicatedStorage.Classes.Ability)
 local Character = require(ReplicatedStorage.Classes.Character)
 local Types = require(ReplicatedStorage.Classes.Types)
 
-local BehaviorModule = require(RunService:IsServer() and ServerStorage.ServerCharacterBehaviors.Survivors.ShedletskyBehavior)
+local BehaviorModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Survivors.ShedletskyBehavior)
 
 local function SwingBehavior(self)
     if RunService:IsServer() then

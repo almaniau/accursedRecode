@@ -15,25 +15,37 @@ local function BuildBehavior(self)
     end
 end
 
-local function BuildermanInit(char : Model)
+local function BuildermanInit(self, char : Model)
     -- there is prob better way to do this is using InstanceUtils.GetCharacterModule in the behavior but i dont give a fuck
-    char:SetAttribute("SentryModel", game.ReplicatedStorage.Assets.BuildermanSentries.DefaultSentry)
+    char:SetAttribute("SentryModel", "Default")
 end
 
-local function CheckValidPlacement(self : Types.Ability)
-    if RunService:IsServer() then
-        local origin = self.OwnerProperties.HRP.CFrame * CFrame.new(0, 0, -4)
-         -- ill have to tweak this later but its a downward raycast
-        local ray = workspace:Raycast(origin, Vector3.new(0, -2.5, 0))
-
-        if ray.Instance then
+local function CheckValidPlacement(self : Types.Ability) -- i have to write code for a forward check
+    print("check placement")
+    local testPart = Instance.new("Part")
+    testPart.Parent = workspace
+    testPart.Position = self.OwnerProperties.HRP.Position + self.OwnerProperties.HRP.CFrame.LookVector * 3
+    testPart.Anchored = true
+    testPart.CanCollide = false
+    testPart.CanQuery = false
+    local params = RaycastParams.new()
+    params.FilterDescendantsInstances = {self.OwnerProperties.Character}
+   
+    local forwardray = workspace:Raycast(self.OwnerProperties.HRP.Position, self.OwnerProperties.HRP.CFrame.LookVector * 3, params)
+    if forwardray then
+        print("standing too close")
+        return false
+    else
+        -- actually edging it rn
+        local raydown = workspace:Raycast((self.OwnerProperties.HRP.CFrame * CFrame.new(0, 0, -3)).Position, Vector3.new(0, -3.7, 0))
+        testPart.Position = (self.OwnerProperties.HRP.CFrame * CFrame.new(0, 0, -3)).Position + Vector3.new(0, -3.7, 0)
+        if raydown then
+            print("yeah you can place")
             return true
         else
+            print("no ground to place on")
             return false
         end
-    else
-        --isnt server???
-        return false
     end
 end
 
@@ -41,10 +53,13 @@ end
 Builderman sentries exact specs and nerd shit (please model it using these rules, it makes my life easier)
 Part names do not have to be casesensitive but animations DO
 Please anchor only the base of the sentry
-Must have an AnimationController with an Animator inside
+Must have an Humanoid with an Animator inside
 Please still follow normal naming conventions e.g, NO SPACES, PascalCase
 Make sure for lvl3 sentries, the rocketshootanim only has keyframes from the rocketpart itself
 When making skins for the sentries, keep the size reasonable imcomparison to the stock sentry
+
+Also every level sentry requires a deploy animation (Action1 Animation Priority)
+lvl 2 and 3 require a transition animation (Action1 Animation Priority)
 
 lvl 1 sentries expect a toppart and base with base being MOTOR6D to toppart,
  a folder that contains anims called Shoot (Action1 Animation Priority) and Idle (Idle Animation Priority)
@@ -84,7 +99,6 @@ local Builderman: Types.Survivor = Character.CreateSurvivor({
 
     GameplayConfig = {
         Abilities = {
-            -- yes the exact stats are fucking hardcoded in, fight me later over it
             Build = Ability.New({
                 Name = "Build",
                 InputName = "FirstAbility",

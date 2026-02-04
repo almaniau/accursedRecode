@@ -1,7 +1,9 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
+local ServerStorage = game:GetService("ServerStorage")
 local Types = require(ReplicatedStorage.Classes.Types)
+local Sentry = require(ServerStorage.Misc.Sentry)
 
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
 
@@ -14,6 +16,9 @@ function BuildermanBehaviorModule.Build(self : Types.Ability)
         warn("you got no sentry model, we should prob fall back but i do later")
         return
     end
+    print(sentryModel)
+    local sentryFolder = game.ReplicatedStorage.Assets.BuildermanSentries:FindFirstChild(sentryModel)
+    local sentry = Sentry.New(sentryFolder, self.Owner)
     
 end
 
