@@ -17,6 +17,8 @@ local Info = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOu
 local MasterSoundGroup = SoundService.SoundGroups.Master
 local SoundFolder = SoundService.TempSounds
 
+--This killer might also be scrapped
+
 --local function DataAnchorBehaviour(self: Types.Ability)
 --    if RunService:IsServer() then
 --        if self.Setup then

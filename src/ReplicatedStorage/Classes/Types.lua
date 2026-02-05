@@ -39,7 +39,9 @@ export type Ability = {
     ChangeAbilityCharges: (self: Ability, Type: "Set" | "Add" | "Take", amount: number) -> (),
 
     --- The name of the input used for the ability, set up in `InputManager`.
-    InputName: string,
+
+    --wasnt typechecked before but make it
+    InputName: "Slash" | "Sprint" | "FirstAbility" | "SecondAbility" | "ThirdAbility" | "FourthAbility",
     --- Literally the behaviour of the ability; what it does. Write your ability here.
     Behaviour: (self: Ability) -> (),
 
@@ -344,6 +346,13 @@ export type Survivor = {
             FootstepSounds: (string | {string})?,
             [string]: (string | {string}),
         },
+    },
+    --hi its anonymous and i fuckiing hate my life
+    FacialExpressions: {
+        Default : string,
+        Hurt : string,
+        Limping : string,
+        Dead : string
     },
 
     --- Gameplay mechanics config that will affect how the character works.

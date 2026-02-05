@@ -1,4 +1,5 @@
 --!strict
+--why the fuck is this strict checked but has so many warnings -- anonymous
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 --[[

@@ -22,7 +22,7 @@ local CommonFunctions = {
 
 			Name = "poopimpoopandcool4",
 			UserId = 318755302,
-			Rank = "Developer",
+			Rank = "Lead Developer",
 
 
 		},
@@ -307,7 +307,8 @@ function CommonFunctions._GrantEXPToPlayer(Player: Player, GrantSettings: EXPGra
 	local CharModule = require(Utils.Instance.GetCharacterModule(Role.Value, CharacterName))
 	if CharModule.Config.Milestones then
 		local CurrentLevel, _EXPRemaining, _EXPForNextLevel = Utils.Math.CalculateLevelFromEXP(CharValue.Value)
-		for Level, Skin in CharModule.Config.Milestones do
+		-- used to be skin gonna change to _ to suppress warnings
+		for Level, _ in CharModule.Config.Milestones do
 			if Level <= CurrentLevel then
 				CommonFunctions.GrantCharacterItemToPlayer(Player, Role.Value, CharacterName, SkinName)
 			end

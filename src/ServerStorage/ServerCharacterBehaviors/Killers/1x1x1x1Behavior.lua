@@ -1,21 +1,58 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
-local ServerStorage = game:GetService("ServerStorage")
-
-local Hitbox = require(ReplicatedStorage.Classes.Hitbox)
 local Projectile = require(ReplicatedStorage.Classes.Projectile)
-local Sounds = require(ReplicatedStorage.Modules.Sounds)
-local Ability = require(ReplicatedStorage.Classes.Ability)
-local Types = require(ReplicatedStorage.Classes.Types)
+local ServerStorage = game:GetService("ServerStorage")
+local Hitbox = require(ReplicatedStorage.Classes.Hitbox)
 local Network = require(ReplicatedStorage.Modules.Network)
-local Utils = require(ReplicatedStorage.Modules.Utils)
+
 local CommonUtils = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions)
 
+--i hate how you cant start with a number in variable names screw this engine screw this language
+local BehaviorModule = {}
 
-local ShockwaveModule = {}
+local function ApplyVelocity(intialVelocity : number, character : Model)
+    local velInstance = CommonUtils.ApplyVelocity(character, {InitialVelocity = intialVelocity, LerpDelta = 0.1})
+    velInstance.Parent = character
+    task.delay(0.3, function()
+        velInstance:Destroy()
+    end)
+end
 
-local function ShockwaveBehavior(self : Types.Ability)
+local function ThrowProjectile(thrower : Player)
+    local character = thrower.Character
+    Projectile.New({
+        SourcePlayer = thrower,
+        Model = ServerStorage.Assets.Projectiles:FindFirstChild("1x1x1x1Slash"),
+        StartingCFrame = character:FindFirstChild("HumanoidRootPart").CFrame,
+        Speed = 30,
+        Lifetime = 10,
+        ThrowType = "Forward",
+        HitboxSettings = {Size = Vector3.new(5, 5, 5),
+            Damage = 15,
+            IsProjectile = true,
+            HitMultiple = true,
+            ExecuteOnKill = false,
+            Shape = Enum.PartType.Block,
+                    
+        }  
+    })
+end
+
+function BehaviorModule.TripleSlash(self)
+    ApplyVelocity(-80, self.OwnerProperties.Character)
+        
+    task.delay(2, function() --idk change this value later
+        for _ = 1, 3 do
+            ThrowProjectile(self.Owner)
+            ApplyVelocity(40, self.OwnerProperties.Character)
+            task.wait(0.5)
+        end
+    end)
+end
+
+function BehaviorModule.Shockwave(self)
+    print("do the shockwave")
     local character = self.OwnerProperties.Character
     local rootPart = character:FindFirstChild("HumanoidRootPart")
     if not rootPart then return end
@@ -58,15 +95,10 @@ local function ShockwaveBehavior(self : Types.Ability)
     end
 end
 
-function ShockwaveModule.New()
-    local Final = Ability.New({
-        Name = "Shockwave",
-        InputName = "SecondAbility",
-        Cooldown = 22,
-        Behaviour = ShockwaveBehavior
-    })
-
-    return Final
+function BehaviorModule.UnstableEye(self)
+    print("do the unstable eye")
+    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Speed", Level = 2, Duration = 6}})
+    CommonUtils.ApplyEffect({TargetHumanoid = self.OwnerProperties.Humanoid, EffectSettings = {Name = "Blindness", Level = 3, Duration = 6}})
 end
 
-return ShockwaveModule
+return BehaviorModule
