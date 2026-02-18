@@ -3,12 +3,14 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
 
+local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local ServerCharacterManager = RunService:IsServer() and require(ServerScriptService.Managers.ServerCharacterManager) or nil
 
 return {
     Name = "Turn Player Into Killer/Survivor",
     Executable = true,
+    Type = Enum,
     Params = {
         {
             Title = "Chosen Player",

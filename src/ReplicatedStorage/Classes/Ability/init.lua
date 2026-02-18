@@ -219,6 +219,7 @@ function AbilityType:Init(charModule: Types.Killer | Types.Survivor, plr: Player
         --is this exploitable? yes.
         --do i give a fuck? no.
         --thanks byfron.
+        --im fucking laughing at this
 
         self.OwnerProperties = {
             Character = self.Owner.Character,
