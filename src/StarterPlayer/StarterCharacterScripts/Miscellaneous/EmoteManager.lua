@@ -62,7 +62,7 @@ function EmoteManager:Init()
 end
 
 function EmoteManager:PlayEmote(name: string)
-	if not self.EmotesAvailable[name] or not self.Hum or self.Hum.Health <= 0 then return end
+	if not self.EmotesAvailable[name] or not self.Hum or self.Hum.Health <= 0 or self.CurrentlyPlayingEmote then return end
 
 	for _, Emote in self.EmotesAvailable do
 		self:StopEmote(Emote.Config.Name or Emote)

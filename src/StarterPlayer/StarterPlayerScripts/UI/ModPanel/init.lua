@@ -24,6 +24,7 @@ local CommandOrder = {
     "ToggleFreezeTime",
     "ToggleAbilityCooldowns",
     "ToggleAbilityCharges",
+    "TurnPlayerInto"
 }
 
 local Prefabs = {

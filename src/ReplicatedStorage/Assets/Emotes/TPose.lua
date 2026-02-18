@@ -9,4 +9,5 @@ return Emote.New({
     AnimationIds = "rbxassetid://87300475457340",
     SoundIds = "rbxassetid://1839549655",
     SpeedMultiplier = 0.1,
+
 })
