@@ -113,6 +113,7 @@ function Ragdoll.Enable(Character: Model, Dupe: boolean)
 		--handle ragdoll limit option
 		Char = Character:Clone()
 		Char.Parent = RagdollFolder
+		Char.Humanoid.PlatformStand = true
 		if Char.PrimaryPart then
 			Char.PrimaryPart.Anchored = false
 		end
@@ -149,11 +150,13 @@ function Ragdoll.Enable(Character: Model, Dupe: boolean)
 		task.spawn(function()
 			if Humanoid then
 				Humanoid.Health = 1
+				Humanoid.PlatformStand = true
+				print(Humanoid.PlatformStand)
 				Humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOff
 
-				if RunService:IsClient() and Players.LocalPlayer.Character == Character then
-					workspace.CurrentCamera.CameraSubject = not Humanoid.BreakJointsOnDeath and (Char:FindFirstChild("Head") or Humanoid) or Humanoid
-				end
+				-- if RunService:IsClient() and Players.LocalPlayer.Character == Character then
+				-- 	workspace.CurrentCamera.CameraSubject = not Humanoid.BreakJointsOnDeath and (Char:FindFirstChild("Head") or Humanoid) or Humanoid
+				-- end
 			end
 		end)
 		

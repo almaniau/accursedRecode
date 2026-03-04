@@ -6,6 +6,7 @@ local Utils = require(ReplicatedStorage.Modules.Utils)
 local PlayerManager = require(script.Parent.PlayerManager)
 local Network = require(ReplicatedStorage.Modules.Network)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
+local CharacterUtils = require(ReplicatedStorage.Modules.Utils.CharacterUtils)
 local Janitor = require(ReplicatedStorage.Packages.Janitor)
 
 local Rand = Random.new()
@@ -121,6 +122,33 @@ end
 function ServerCharacterManager._InitCharacter(player: Player, Char: Model, charModule: ModuleScript)
     local module = Utils.Type.CopyTable(require(charModule))
     module.Owner = player
+
+
+    if module.FacialExpressions then
+        local face : Decal = Char.Head:FindFirstChild("face")
+        if not face then 
+            warn("you got no face") 
+            return 
+        end
+        face.ColorMap = module.FacialExpressions.Default
+        CharacterUtils.ObserveHumanoid(player, function(humanoid : Humanoid, janitorThing)
+            humanoid.HealthChanged:Connect(function(currentHealth : number)
+                print("damaged")
+                if currentHealth <= 0 then
+                   face.ColorMapContent = Content.fromUri(module.FacialExpressions.Dead)
+                   return
+                end
+                face.ColorMapContent = Content.fromUri(module.FacialExpressions.Hurt)
+                task.delay(0.8, function()
+                    if humanoid.Health > humanoid.MaxHealth / 2 then
+                        face.ColorMapContent = Content.fromUri(module.FacialExpressions.Default)
+                    else
+                        face.ColorMapContent = Content.fromUri(module.FacialExpressions.Limping)
+                    end
+                end)
+            end)
+        end)
+    end
 
     --Abilities
     local CharacterAbilities = require(Char.PlayerAbilities.CharacterAbilities)

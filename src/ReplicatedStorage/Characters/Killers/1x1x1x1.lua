@@ -4,12 +4,12 @@ local Debris = game:GetService("Debris")
 local RunService = game:GetService("RunService")
 local ServerScriptService = game:GetService("ServerScriptService")
 local SoundService = game:GetService("SoundService")
+local ServerStorage = game:GetService("ServerStorage")
 
 local CommonFunctions = RunService:IsServer() and require(ServerScriptService.System.CommonFunctions) or nil
 local PlayerSpeedManager = RunService:IsServer() and require(game:GetService("ServerScriptService").Managers.PlayerManager.PlayerSpeedManager) or nil
 local Character = require(ReplicatedStorage.Classes.Character)
 local Ability = require(ReplicatedStorage.Classes.Ability)
-local TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash)
 local Types = require(ReplicatedStorage.Classes.Types)
 local Utils = require(ReplicatedStorage.Modules.Utils)
 local Sounds = require(ReplicatedStorage.Modules.Sounds)
@@ -17,6 +17,27 @@ local Sounds = require(ReplicatedStorage.Modules.Sounds)
 local Info = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut)
 local MasterSoundGroup = SoundService.SoundGroups.Master
 local SoundFolder = SoundService.TempSounds
+local BehaviorsModule = RunService:IsServer() and require(ServerStorage.ServerCharacterBehaviors.Killers["1x1x1x1Behavior"])
+print(BehaviorsModule)
+
+local function TripleSlashBehavior(self : Types.Ability)
+    print("triple slash")
+    if RunService:IsServer() then
+        BehaviorsModule.TripleSlash(self)
+    end
+end
+
+local function ShockwaveBehavior(self : Types.Ability)
+    if RunService:IsServer() then
+        BehaviorsModule.Shockwave(self)
+    end
+end
+
+local function UnstableEyeBehavior(self : Types.Ability)
+    if RunService:IsServer() then
+        BehaviorsModule.UnstableEye(self)
+    end
+end
 
 --local function DataAnchorBehaviour(self: Types.Ability)
 --    if RunService:IsServer() then
@@ -180,15 +201,28 @@ local _1x1x1x1: Types.Killer = Character.CreateKiller({
 
             --Slash
             Slash = require(ReplicatedStorage.Classes.Ability.Slash).New({
-                Duration = 0.5 -- this was way too low
+                Duration = 0.5 -- this was way too
             }),
 
-            TripleSlash = require(ReplicatedStorage.Classes.Ability.TripleSlash).New({
-                
+            TripleSlash = Ability.New({
+                Name = "Triple Slash",
+                InputName = "FirstAbility",
+                Cooldown = 15,
+                Behaviour = TripleSlashBehavior
             }),
 
-            Shockwave = require(ReplicatedStorage.Classes.Ability.Shockwave).New({
+            Shockwave = Ability.New({
+                Name = "Shockwave",
+                InputName = "SecondAbility",
+                Cooldown = 25,
+                Behaviour = ShockwaveBehavior
+            }),
 
+            UnstableEye = Ability.New({
+                Name = "Unstable Eye",
+                InputName = "ThirdAbility",
+                Cooldown = 30,
+                Behaviour = UnstableEyeBehavior
             }),
 
             --DataAnchor = Ability.New({

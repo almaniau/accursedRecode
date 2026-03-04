@@ -283,4 +283,18 @@ function CharacterUtils.GetCharactersWithRoles(IncludeAFK: boolean?): {[string]:
     return Characters
 end
 
+-- call once to apply face for: normal, hurt, under 50%, and dead
+--haha none of this is fucking useful anymore i found a better way to do this
+@deprecated
+function CharacterUtils.ApplyDefaultFacialExpressions(character : Model)
+	local _humanoid = character:FindFirstChildWhichIsA("Humanoid")
+	local face : Decal = character.Head:FindFirstChild("face")
+	local currentCharacter = character:GetAttribute("CharacterName")
+	if not currentCharacter then return end
+	if not face then return end -- i have no mouth yet i must scream
+	 -- we live a cruel world for this to be not typecasted
+	local characterInfo = require(ReplicatedStorage.Characters.Survivors:FindFirstChild(currentCharacter))
+	print(characterInfo.FacialExpressions)
+end
+
 return CharacterUtils

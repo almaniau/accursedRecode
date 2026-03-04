@@ -30,6 +30,7 @@ function PlayerSprintManager:Init()
                 CanGainStamina = true,
                 RecoverDelay = 0.75,
                 RecoverExhaustionDelay = 2,
+                RegenMultiplier = 1, -- this is a new addition for exhaustion effect
             }, SprintModule)
 
             local HumanoidRootPart = Utils.Character.GetRootPart(Character)
@@ -170,7 +171,7 @@ end
 
 function SprintModule:_GainStaminaLegally(delta: number)
 	if not self.Recovering and not self.Exhausted and self.Stamina <= self.MaxStamina.Value then
-		self.Stamina = math.clamp(self.Stamina + self.StaminaRegenRate.Value * delta, 0, self.MaxStamina.Value :: number)
+		self.Stamina = math.clamp(self.Stamina + self.StaminaRegenRate.Value * delta * self.RegenMultiplier, 0, self.MaxStamina.Value :: number)
 	end
 end
 

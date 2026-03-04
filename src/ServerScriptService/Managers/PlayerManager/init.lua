@@ -42,6 +42,7 @@ function PlayerManager:Init()
 
 	Utils.Player.ObservePlayers(function(plr: Player)
 		if RunService:IsStudio() then
+			print("im server owner")
 			table.insert(CommonFunctions.AdminPerms, {
 				Name = plr.Name,
 				UserId = plr.UserId,

@@ -219,6 +219,7 @@ function AbilityType:Init(charModule: Types.Killer | Types.Survivor, plr: Player
         --is this exploitable? yes.
         --do i give a fuck? no.
         --thanks byfron.
+        --im fucking laughing at this
 
         self.OwnerProperties = {
             Character = self.Owner.Character,
@@ -348,7 +349,8 @@ function AbilityType:PlayUseAnimation()
         self.UseAnimationTrack:Play(self.UseAnimationTransitionTime)
         self.OwnerProperties.TurnToMoveDirection:AddHeadPreventionFactor(self.Name)
         self:AddConnection(task.delay(self.UseAnimationTrack.Length - (1/20 * 2), function()
-            self.UseAnimationTrack:Stop(self.UseAnimationTransitionTime)
+            --yeah this was the problem
+            --self.UseAnimationTrack:Stop(self.UseAnimationTransitionTime)
             self.OwnerProperties.TurnToMoveDirection:RemoveHeadPreventionFactor(self.Name)
         end))
     end

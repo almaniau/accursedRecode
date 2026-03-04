@@ -96,6 +96,7 @@ function AnimationManager:Init()
 	self.Janitor:Add(RunService.PreAnimation:Connect(function()
 		if (self.AnimationTracks.Walk and self.AnimationTracks.Walk.IsPlaying) or (self.AnimationTracks.Sprint and self.AnimationTracks.Sprint.IsPlaying) then
 			local DirectionOfMovement = HumanoidRootPart.CFrame:VectorToObjectSpace(HumanoidRootPart.AssemblyLinearVelocity)
+			--humanoid.MoveDirection exists but its whatever
 			DirectionOfMovement = Vector3.new(DirectionOfMovement.X / Humanoid.WalkSpeed, 0, DirectionOfMovement.Z / Humanoid.WalkSpeed)
 			if DirectionOfMovement.Z > 0.1 then
 				self:AdjustAnimationSpeed("Walk", -(Humanoid.WalkSpeed / 16))
